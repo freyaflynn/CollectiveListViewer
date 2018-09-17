@@ -12,16 +12,21 @@ import { Injectable } from '@angular/core';
 export class AppComponent {
   title = 'CollectiveListViewer';
   hoveredCard = {};
-  cards = [];
+  cards = {list: []};
 
-  constructor(private http: HttpClient) { this.loadCards(); }
+  constructor(private http: HttpClient) {
+    this.loadCards()
+    .subscribe((result) => {
+      console.log(`Cards: ${result}`);
+    });
+  }
 
   loadCards() {
-    this.cards = this.http.get('https://server.collective.gg/api/public-cards');
+    return this.http.get('https://server.collective.gg/api/public-cards');
   }
   getCard(cardName) {
     let uid = -1;
-    this.cards.forEach(card => {
+    this.cards.list.forEach(card => {
       if (card.card.text.Name === cardName) {
         uid = card.card.UID;
       }
