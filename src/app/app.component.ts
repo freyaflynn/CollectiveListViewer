@@ -10,7 +10,6 @@ import { Injectable } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'CollectiveListViewer';
   hoveredCard = {};
   cards = {list: []};
 
